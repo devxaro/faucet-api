@@ -19,7 +19,7 @@ Ensure you have the following installed on your system:
 2. Navigate to the project directory:
 
    ```bash
-   cd flokicoin-faucet
+   cd faucet-api
    ```
 
 3. Install the dependencies using Yarn:
