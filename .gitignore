@@ -50,4 +50,4 @@ coverage
 **/newman
 
 database.sqlite
-./wallet
+wallet/**
