@@ -1,0 +1,17 @@
+#!/bin/sh
+set -euo pipefail
+
+port=${1-${SERVER_PORT?"SERVER_PORT undefined"}}
+
+http_code=`
+  curl \
+    --silent \
+    --show-error \
+    -o /dev/stderr \
+    -w "%{http_code}" \
+    http://localhost:${port}/api/v1/app/ping
+`
+
+echo '{"http_code": '$http_code'}'
+
+[[ "$http_code" == 200 ]]

@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# Start the wallet in a screen session
+screen -dmS wallet ./twallet -w=./wallet --testnet --connect="$FLC_TESTNET_PEER"
+
+# Wait for a short period before starting checks
+sleep 2
+
+# Function to get the wallet state
+get_wallet_state() {
+  curl -k -s -H "Content-Type: application/json" "${WALLET_API_URL}/v1/state"
+}
+
+# Wait until the wallet is LOCKED
+while true; do
+  state=$(get_wallet_state)
+  echo "Current wallet state: $state"
+
+  # Check for "LOCKED" state
+  if echo "$state" | grep -q "\"state\":\"LOCKED\""; then
+    echo "Wallet is locked. Proceeding to unlock."
+    break
+  fi
+
+  sleep 5
+done
+
+# Unlock the wallet
+curl -k -X POST \
+  "${WALLET_API_URL}/v1/unlockwallet" \
+  --cert ./wallet/tls.cert \
+  --key ./wallet/tls.key \
+  --header "Grpc-Metadata-macaroon: $WALLET_MACAROON_HEX" \
+  -H "Content-Type: application/json" \
+  -d "{\"wallet_password\":\"$WALLET_PASSWORD\"}"
+
+# Wait until the wallet is UNLOCKED
+while true; do
+  state=$(get_wallet_state)
+  echo "Current wallet state: $state"
+
+  # Check for "UNLOCKED" state
+  if echo "$state" | grep -q "\"state\":\"UNLOCKED\""; then
+    echo "Wallet is unlocked."
+    break
+  fi
+
+  sleep 5
+done
+
+# Start the application
+npm start

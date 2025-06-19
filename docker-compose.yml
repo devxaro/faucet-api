@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  flokicoin-faucet-backend:
+    build:
+      context: .
+    #image: flokicoin-faucet-backend
+    container_name: flokicoin-faucet-backend
+    environment:
+      - APP_ENV=${APP_ENV}
+      - SERVER_PORT=${SERVER_PORT}
+      - APP_URL=${APP_URL}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - HMAC_SECRET_KEY=${HMAC_SECRET_KEY}
+      - FLC_TESTNET_PEER=${FLC_TESTNET_PEER}
+      - WALLET_API_URL=${WALLET_API_URL}
+      - WALLET_PASSWORD=${WALLET_PASSWORD}
+      - WALLET_TLS_PRIVATE_KEY=${WALLET_TLS_PRIVATE_KEY}
+      - WALLET_TLS_CERTIFICATE=${WALLET_TLS_CERTIFICATE}
+      - WALLET_MACAROON_HEX=${WALLET_MACAROON_HEX}
+      - EXPLORER_API_URL=${EXPLORER_API_URL}
+      - DEFAULT_ADDRESS=${DEFAULT_ADDRESS}
+
+    restart: always
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    volumes:
+      - ../volumes/wallet:/app/wallet
+      - ../volumes/gminer:/app/gminer
+      - ../volumes/database/database.sqlite:/app/database.sqlite

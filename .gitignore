@@ -1,0 +1,53 @@
+# Intellij
+.idea
+*.iml
+*.iws
+*.ipr
+*.ids
+*.orig
+
+# pyenv version file
+.python-version
+
+# Python
+*.py[co]
+
+## Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+#bin
+var
+sdist
+deb_dist
+develop-eggs
+target
+venv
+.cache
+.sonar
+.oracle_jre_usage
+.scannerwork
+.env
+**/wiki
+database
+
+
+## Installer logs
+pip-log.txt
+
+## Unit test / coverage reports
+.coveragerc
+.coverage
+coverage
+
+**/node_modules
+**/.npmrc
+**/.bash_history
+**/keys
+**/newman
+
+database.sqlite
+./wallet

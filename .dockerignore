@@ -1,0 +1,13 @@
+.git
+.gitignore
+/.idea
+/.vscode
+.project
+.DS_Store
+.env
+dist
+docs
+node_modules
+tests
+database
+.husky

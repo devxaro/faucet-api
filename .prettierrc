@@ -1,0 +1,12 @@
+{
+  "plugins": ["prettier-plugin-organize-imports"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrderMergeDuplicateImports": true,
+  "arrowParens": "avoid",
+  "printWidth": 180,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "none",
+  "bracketSpacing": false
+}
