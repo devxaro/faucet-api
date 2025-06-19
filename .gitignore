@@ -33,6 +33,7 @@ venv
 .env
 **/wiki
 database
+**/.DS_Store
 
 
 ## Installer logs
