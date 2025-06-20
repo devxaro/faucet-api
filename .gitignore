@@ -1,54 +1,53 @@
-# Intellij
-.idea
-*.iml
-*.iws
-*.ipr
-*.ids
-*.orig
+# ------------------------------------
+# 📦 Node / Yarn
+# ------------------------------------
+node_modules/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/global/
+!.yarn/install-state.gz  # Keep for CI/CD
+!.yarnrc.yml             # Yarn 4 config
 
-# pyenv version file
-.python-version
+# ------------------------------------
+# 🛠️ Build output
+# ------------------------------------
+build/
+dist/
+.vite/
 
-# Python
-*.py[co]
-
-## Packages
-*.egg
-*.egg-info
-dist
-build
-eggs
-parts
-#bin
-var
-sdist
-deb_dist
-develop-eggs
-target
-venv
-.cache
-.sonar
-.oracle_jre_usage
-.scannerwork
+# ------------------------------------
+# 🧪 Env files
+# ------------------------------------
 .env
-**/wiki
-database
-**/.DS_Store
+.env.*.local
 
+# ------------------------------------
+# 🧠 IDEs / Tools
+# ------------------------------------
+.idea/
+.vscode/
+*.swp
+*.swo
 
-## Installer logs
-pip-log.txt
-
-## Unit test / coverage reports
-.coveragerc
-.coverage
-coverage
-
-**/node_modules
-**/.npmrc
-**/.bash_history
-**/keys
-**/newman
-
+# ------------------------------------
+# 🪵 Logs / System
+# ------------------------------------
+.DS_Store
+*.log
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 database.sqlite
-wallet/**
+wallet/*
+!.gitkeep
+
+
+# ------------------------------------
+# 🧪 Test output
+# ------------------------------------
+coverage/
+jest-html-reporters-*.html
+
+
+
