@@ -1,5 +1,5 @@
 # backend/Dockerfile
-FROM node:20.19.2-alpine AS node-base
+FROM node:18-alpine AS node-base
 
 ##
 # Build image
@@ -36,7 +36,7 @@ COPY --chmod=0555  ./bin/docker/entrypoint ./
 RUN curl -fsSL https://raw.githubusercontent.com/myfloki/community-tools/main/downloader.sh -o ./downloader.sh \
     && chmod +x ./downloader.sh \
     && ./downloader.sh
-    
+
 HEALTHCHECK \
   --interval=10s \
   --timeout=10s \
