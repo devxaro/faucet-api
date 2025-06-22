@@ -1,5 +1,5 @@
 # backend/Dockerfile
-FROM node:18-alpine AS node-base
+FROM node:18.20.7-alpine AS node-base
 
 ##
 # Build image
