@@ -41,6 +41,7 @@ pnpm-debug.log*
 database.sqlite
 wallet/*
 !.gitkeep
+gminer/gminer.log
 
 
 # ------------------------------------
