@@ -25,6 +25,6 @@ services:
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
     volumes:
-      - ../volumes/wallet:/app/wallet
-      - ../volumes/gminer:/app/gminer
-      - ../volumes/database/database.sqlite:/app/database.sqlite
+      - ../volumes/wallet:/volumes/wallet
+      - ../volumes/gminer:/volumes/gminer
+      - ../volumes/database/database.sqlite:/volumes/database/database.sqlite

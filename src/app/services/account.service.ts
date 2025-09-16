@@ -44,7 +44,7 @@ export class AccountService extends AbstractRepository<TAccount> {
       const balance = truncateToDecimals(chain_stats?.funded_txo_sum / 100000000);
       return balance;
     } catch (err) {
-      throw new TechnicalErrors.InternalError(err);
+      return 0;
     }
   }
 }

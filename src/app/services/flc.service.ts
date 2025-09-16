@@ -18,7 +18,7 @@ export class FlcService {
 
   async mineBlock() {
     try {
-      const result = await this.cli.runCmd('gminer', ['-c', appConfig.gminerConfigPath]);
+      const result = await this.cli.runCmd(appConfig.gminerPath, ['-c', appConfig.gminerConfigPath]);
       return result;
     } catch (err: any) {
       throw new AccountErrors.FetchAccountBalanceError(err.message);

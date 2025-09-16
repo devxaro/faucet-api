@@ -18,7 +18,7 @@ RUN npm run build
 ##
 # Operator
 #
-FROM ghcr.io/myfloki/flokicoin:0.25.7.alpha.15-prod AS operator
+FROM ghcr.io/myfloki/flokicoin:0.25.7.alpha.33-prod AS operator
 
 
 
@@ -33,17 +33,13 @@ WORKDIR /app
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 
-COPY ./gminer ./gminer
-COPY ./wallet ./wallet
 COPY ./package.json ./
 
 COPY --chmod=0555  ./bin/docker/healthcheck ./
 COPY --chmod=0555  ./bin/docker/entrypoint ./
-COPY --from=operator --chmod=0555  /bin/twallet ./
+COPY --from=operator --chmod=0555  /bin/twallet ../volumes/wallet
+COPY --from=operator --chmod=0555  /bin/gminer ../volumes/gminer
 
-RUN curl -fsSL https://raw.githubusercontent.com/myfloki/community-tools/main/downloader.sh -o ./downloader.sh \
-  && chmod +x ./downloader.sh \
-  && ./downloader.sh
 
 HEALTHCHECK \
   --interval=10s \

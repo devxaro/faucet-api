@@ -1,16 +1,25 @@
-import {join} from 'path';
-import {base64ToStr} from '../app/helpers/utils.helper';
+import {resolve} from 'path';
+import {readFile, readFileHex} from '../app/helpers/utils.helper';
+
+const walletTlsCertPath = resolve(process.cwd(), '../volumes/wallet/tls.cert');
+const walletTlsKeyPath = resolve(process.cwd(), '../volumes/wallet/tls.key');
+
+const [walletTlsCertificate, walletTlsPrivateKey] = await Promise.all([readFile(walletTlsCertPath), readFile(walletTlsKeyPath)]);
+
+const walletMacaroonPath = resolve(process.cwd(), '../volumes/wallet/data/chain/flokicoin/test/admin.macaroon');
+const walletMacaroonHex = await readFileHex(walletMacaroonPath);
 
 export const appConfig = {
-  walletPath: join(process.cwd(), 'wallet'),
-  gminerConfigPath: join(process.cwd(), 'gminer/gminer.conf'),
+  gminerConfigPath: resolve(process.cwd(), '../volumes/gminer/gminer.conf'),
+  gminerPath: resolve(process.cwd(), '../volumes/gminer/gminer'),
+  databasePath: resolve(process.cwd(), '../volumes/database/database.sqlite'),
   appEnv: process.env.APP_ENV,
   jwtSecretKey: process.env.JWT_SECRET_KEY,
   hmacSecretKey: process.env.HMAC_SECRET_KEY,
   walletApiUrl: process.env.WALLET_API_URL,
-  walletTlsPrivateKey: base64ToStr(process.env.WALLET_TLS_PRIVATE_KEY),
-  walletTlsCertificate: base64ToStr(process.env.WALLET_TLS_CERTIFICATE),
-  walletMacaroonHex: process.env.WALLET_MACAROON_HEX,
+  walletTlsPrivateKey,
+  walletTlsCertificate,
+  walletMacaroonHex,
   explorerApiUrl: process.env.EXPLORER_API_URL,
   defaultAddress: process.env.DEFAULT_ADDRESS,
   appUrl: process.env.APP_URL,

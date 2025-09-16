@@ -2,6 +2,7 @@ import crypto from 'crypto';
 import path from 'path';
 import tmp from 'tmp';
 import {fileURLToPath} from 'url';
+import {readFile as fsReadFile} from 'fs/promises';
 
 export const __filename = fileURLToPath(import.meta.url);
 
@@ -67,4 +68,21 @@ export const truncateToDecimals = (num, nbDecimal = 5) => {
 
 export const base64ToStr = (encodedStr: string) => {
   return Buffer.from(encodedStr, 'base64').toString('utf-8');
+};
+
+export const readFile = async (filePath: string): Promise<string | undefined> => {
+  try {
+    return await fsReadFile(filePath, 'utf8');
+  } catch {
+    return undefined;
+  }
+};
+
+export const readFileHex = async (filePath: string): Promise<string | undefined> => {
+  try {
+    const buf = await fsReadFile(filePath);
+    return buf.toString('hex');
+  } catch {
+    return undefined;
+  }
 };

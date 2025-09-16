@@ -8,7 +8,7 @@ import {appConfig} from './app.config';
 export const databaseConfig: any = {
   type: 'sqlite',
   synchronize: true,
-  database: 'database.sqlite',
+  database: appConfig.databasePath,
   logging: appConfig.logging,
   cache: {
     duration: 30000
