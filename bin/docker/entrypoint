@@ -1,10 +1,20 @@
 #!/bin/bash
 
 # Start the wallet in a screen session
-screen -dmS wallet ../volumes/twallet -w=./wallet --testnet --connect="$FLC_TESTNET_PEER"
+screen -dmS wallet /volumes/twallet -w=./wallet --testnet --connect="$FLC_TESTNET_PEER"
 
 # Wait for a short period before starting checks
 sleep 2
+
+# Resolve the macaroon hex string directly from the wallet file if needed
+MACAROON_PATH=${WALLET_MACAROON_PATH:-/volumes/wallet/data/chain/flokicoin/test/admin.macaroon}
+if [ -z "$WALLET_MACAROON_HEX" ]; then
+  if [ ! -f "$MACAROON_PATH" ]; then
+    echo "Macaroon file not found at $MACAROON_PATH" >&2
+    exit 1
+  fi
+  WALLET_MACAROON_HEX=$(hexdump -ve '1/1 "%02x"' "$MACAROON_PATH")
+fi
 
 # Function to get the wallet state
 get_wallet_state() {
@@ -28,8 +38,8 @@ done
 # Unlock the wallet
 curl -k -X POST \
   "${WALLET_API_URL}/v1/unlockwallet" \
-  --cert ../volumes/wallet/tls.cert \
-  --key ../volumes/wallet/tls.key \
+  --cert /volumes/wallet/tls.cert \
+  --key /volumes/wallet/tls.key \
   --header "Grpc-Metadata-macaroon: $WALLET_MACAROON_HEX" \
   -H "Content-Type: application/json" \
   -d "{\"wallet_password\":\"$WALLET_PASSWORD\"}"
