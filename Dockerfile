@@ -35,10 +35,13 @@ COPY --from=builder /app/node_modules ./node_modules
 
 COPY ./package.json ./
 
+RUN rm -f /volumes/wallet && mkdir -p /volumes/wallet \
+  && rm -f /volumes/gminer && mkdir -p /volumes/gminer
+
 COPY --chmod=0555  ./bin/docker/healthcheck ./
 COPY --chmod=0555  ./bin/docker/entrypoint ./
-COPY --from=operator --chmod=0555  /bin/twallet ../volumes/wallet
-COPY --from=operator --chmod=0555  /bin/gminer ../volumes/gminer
+COPY --from=operator --chmod=0555  /bin/twallet ../volumes/twallet
+COPY --from=operator --chmod=0555  /bin/gminer ../volumes/gminer/gminer
 
 
 HEALTHCHECK \
