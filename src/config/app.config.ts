@@ -11,7 +11,7 @@ const walletMacaroonHex = await readFileHex(walletMacaroonPath);
 
 export const appConfig = {
   gminerConfigPath: resolve(process.cwd(), '../volumes/gminer/gminer.conf'),
-  gminerPath: resolve(process.cwd(), '../volumes/gminer/gminer'),
+  gminerPath: resolve(process.cwd(), './gminer'),
   databasePath: resolve(process.cwd(), '../volumes/database/database.sqlite'),
   appEnv: process.env.APP_ENV,
   jwtSecretKey: process.env.JWT_SECRET_KEY,
